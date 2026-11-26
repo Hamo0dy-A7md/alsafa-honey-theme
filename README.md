@@ -1,48 +1,44 @@
-<a href="https://github.com/SallaApp/theme-raed-react">
-  <img src=".github/assets/banner.svg" alt="Theme Raed is now a React theme. This Twig repository is deprecated: new themes start from SallaApp/theme-raed-react." width="100%">
-</a>
+# @salla.sa/theme-raed
 
-> [!WARNING]
-> **This repository is deprecated.** Theme Raed is now a React theme, built on Twilight for React. New Salla themes start from [SallaApp/theme-raed-react](https://github.com/SallaApp/theme-raed-react).
+React storefront theme starter kit for [Salla](https://salla.sa) stores —
+built with TanStack Start and Vite, rendered server-side in workerd via
+`@salla.sa/twilight-theme-engine`.
 
-<p align="center">
-  <a href="https://github.com/SallaApp/theme-raed-react"><img src=".github/assets/card-raed-react.svg" alt="Start a new theme: SallaApp/theme-raed-react" width="49%"></a>
-  <a href="https://docs.salla.dev/twilight/react"><img src=".github/assets/card-docs.svg" alt="Read the docs: Twilight for React" width="49%"></a>
-</p>
+## Quick start
 
-## Start a new theme
+You need pnpm 10 and Node.js 22 (22.22.2 or later), 24 (24.15.0 or later) or 26+.
+
+Scaffold a new theme with the Salla CLI:
 
 ```bash
-npm install -g @salla.sa/cli
-salla theme doctor                     # checks Node, pnpm and git
-salla theme create --name "My Store"   # scaffolds Raed React and starts the dev server
+npx @salla.sa/cli@beta theme create
 ```
 
-The storefront opens at `http://localhost:5173/en`, or `/ar` for Arabic. You don't need a Salla account to create and run a theme. The [quick start](https://docs.salla.dev/twilight/react/start/quick-start) walks through each step.
+Or work directly inside a copy of this package:
 
-## Twig and React side by side
+```bash
+pnpm install
+pnpm dev
+```
 
-|                   | Twig (this repository)                                                    | React                                                                       |
-| ----------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Status            | Deprecated                                                                | Active                                                                      |
-| Repository        | `SallaApp/theme-raed`                                                     | [`SallaApp/theme-raed-react`](https://github.com/SallaApp/theme-raed-react) |
-| Templates         | Twig views in `src/views`                                                 | React components in `app/`                                                  |
-| Rendering         | The Salla Store renders the Twig                                          | Server-rendered with TanStack Start on Cloudflare Workers                   |
-| Local development | `salla theme preview` on a demo store                                     | `salla theme dev`, with hot reload and no login                             |
-| Docs              | [Twilight (Twig)](https://docs.salla.dev/?nav=01HNFTD5Y5ESFQS3P9MJ0721VM) | [Twilight for React](https://docs.salla.dev/twilight/react)                 |
+Running `salla theme dev` writes a `.env` with `VITE_STORE_DOMAIN`
+(defaults to the demo store), which points the dev server at your store's data,
+and `VITE_TWILIGHT_URL`, the fallback twilight SDK build used only when the
+store's settings don't pin a release (`theme.twilight.version`).
 
-## Where to go next
+## Scripts
 
-| Guide                                                                                | What it covers                                                                 |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| [Quick start](https://docs.salla.dev/twilight/react/start/quick-start)               | Create a theme, run it locally and change one thing.                           |
-| [Project structure](https://docs.salla.dev/twilight/react/start/project-structure)   | The few files a theme owns and what each one does.                             |
-| [How it works](https://docs.salla.dev/twilight/react/start/how-it-works)             | What happens between a customer typing an address and a rendered page.         |
-| [Settings](https://docs.salla.dev/twilight/react/guide/settings)                     | Declare merchant settings in `twilight.json` and read them in your components. |
-| [Theme editor](https://docs.salla.dev/twilight/react/local-development/theme-editor) | Open the merchant theme editor around your local dev server.                   |
-| [Publish](https://docs.salla.dev/twilight/react/local-development/publish)           | Push your theme to its repository and submit it for review.                    |
-| [Build with AI](https://docs.salla.dev/twilight/react/start/build-with-ai)           | Give your coding assistant the Salla Partners agent kit and MCP.               |
+| Script                | Description                         |
+| --------------------- | ----------------------------------- |
+| `pnpm dev`            | Start the Vite dev server (workerd) |
+| `pnpm build`          | Production build                    |
+| `pnpm preview`        | Preview the production build        |
+| `pnpm typecheck`      | TypeScript type checking            |
+| `pnpm test`           | Run the test suite (Vitest)         |
+| `pnpm check:manifest` | Validate `twilight.json`            |
 
-## Need help?
+## Deployment
 
-Ask in the [Salla developers community on Telegram](https://t.me/salladev), or open an issue on [theme-raed-react](https://github.com/SallaApp/theme-raed-react/issues).
+Salla builds and publishes your theme on its own infrastructure — push to your
+theme repository and the platform takes it from there. No deploy configuration,
+credentials, or server runtime settings ship with this starter kit.
